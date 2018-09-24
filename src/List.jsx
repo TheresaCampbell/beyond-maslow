@@ -21,10 +21,30 @@ class List extends Component {
     .catch(error => console.log(error))
   }
 
+// Adding a new list item, sending it to the Rails API, and logging the response received to the console. The response is not being posted yet.
+  addNewListItem = () => {
+    axios.post(
+      'http://localhost:3001/list_items.json',
+      { listItem:
+        {
+          title: '',
+          body: '',
+          cost: '',
+          category: '',
+          completed: ''
+        }
+      }
+    )
+    .then(response => {
+      console.log(response)
+    })
+    .catch(error => console.log(error))
+  }
+
   render() {
     return (
     <div>
-      <button className="newListItemButton">
+      <button className="newListItemButton" onClick={this.addNewListItem}>
         +
       </button>
       {this.state.listItems.map((listItem) => {
