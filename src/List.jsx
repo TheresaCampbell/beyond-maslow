@@ -24,6 +24,9 @@ class List extends Component {
   render() {
     return (
     <div>
+      <button className="newListItemButton">
+        +
+      </button>
       {this.state.listItems.map((listItem) => {
         return(<ListItem listItem={listItem} key={listItem.id}/>)
       })}
