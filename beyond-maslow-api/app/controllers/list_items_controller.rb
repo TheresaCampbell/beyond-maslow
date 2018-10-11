@@ -1,7 +1,8 @@
 class ListItemsController < ApplicationController
 
   def index
-    @list_items = ListItem.all
+    # Are they actually being displayed most recent first? Can't tell until real data is added.
+    @list_items = ListItem.order("created_at DESC")
     render json: @list_items
   end
 

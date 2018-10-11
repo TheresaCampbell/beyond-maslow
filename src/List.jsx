@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import ListItem from './ListItem'
+import update from 'immutability-helper';
 
 class List extends Component {
 
   constructor(props) {
     super(props)
     this.state = {
-      listItems: []
+      listItems: [],
+      editingListItemId: null
     }
   }
 
@@ -21,11 +23,11 @@ class List extends Component {
     .catch(error => console.log(error))
   }
 
-// Adding a new list item, sending it to the Rails API, and logging the response received to the console. The response is not being posted yet.
+// Adding a new list item, sending it to the Rails API, logging the response received to the console, posting the new list item, and setting 'editingListItemId' to this new list item's id.
   addNewListItem = () => {
     axios.post(
       'http://localhost:3001/list_items.json',
-      { listItem:
+      { list_item:
         {
           title: '',
           body: '',
@@ -36,7 +38,14 @@ class List extends Component {
       }
     )
     .then(response => {
-      console.log(response)
+      console.log(response);
+      const listItems = update(this.state.listItems, {
+        $splice: [[0, 0, response.data]]
+      })
+      this.setState({
+        listItems: listItems,
+        editingListItemId: response.data.id
+      })
     })
     .catch(error => console.log(error))
   }
