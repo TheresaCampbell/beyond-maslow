@@ -1,6 +1,6 @@
-puts "Seeding list items."
+puts "Seeding activities."
 
-listItems = ListItem.create(
+activities = Activity.create(
   [
     {
       title: "Brickworks",
@@ -33,4 +33,4 @@ listItems = ListItem.create(
   ]
 )
 
-puts "List items seeded!"
+puts "Activities seeded!"
