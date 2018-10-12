@@ -18,11 +18,30 @@ class ActivityForm extends Component {
     this.setState({[e.target.name]: e.target.value})
   }
 
+  //When the user clicks away from the form, their changes are saved.
+  handleBlur = (e) => {
+    const activity = {
+      title: this.state.title,
+      body: this.state.body,
+      cost: this.state.cost,
+      category: this.state.category,
+      completed: this.state.completed
+    }
+    axios.put(
+      `http://localhost:3001/activities/${this.props.activity.id}`,
+      {activity: activity}
+    )
+    .then(response => {
+      console.log(response)
+    })
+    .catch(error => console.log(error))
+  }
+
   //The activity form, used to edit individual activities.
   render() {
     return(
       <div className="activity">
-        <form>
+        <form onBlur={this.handleBlur}>
           <input name="title" type="text" placeholder='Title'
           value={this.state.title} onChange={this.handleInput}/>
           <textarea name="body" placeholder='Description'
