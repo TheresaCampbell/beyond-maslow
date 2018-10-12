@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Activity from './Activity'
+import Activity from './Activity';
+import ActivityForm from './ActivityForm';
 import update from 'immutability-helper';
 
 class List extends Component {
@@ -57,8 +58,11 @@ class List extends Component {
         +
       </button>
       {this.state.activities.map((activity) => {
-        return(<Activity activity={activity} key={activity.id}/>)
-
+        if (this.state.editingActivityId === activity.id) {
+          return(<ActivityForm activity={activity} key={activity.id}/>)
+        } else {
+          return(<Activity activity={activity} key={activity.id}/>)
+        }
       })}
     </div>
     )
