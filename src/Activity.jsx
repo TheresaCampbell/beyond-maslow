@@ -1,13 +1,25 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-const Activity = ({activity}) =>
-  <div className="activity" key={activity.id}>
-    <h3>{activity.title}</h3>
-    <p>{activity.body}</p>
-    <p>{activity.cost}</p>
-    <p>{activity.category}</p>
+class Activity extends Component {
+
+  handleClick = () => {
+    this.props.onClick(this.props.activity.id)
+  }
+
+  render() {
+    return(
+      <div className="activity">
+        <h3 onClick={this.handleClick}>{this.props.activity.title}</h3>
+        <p onClick={this.handleClick}>{this.props.activity.body}</p>
+        <p onClick={this.handleClick}>{this.props.activity.cost}</p>
+        <p onClick={this.handleClick}>{this.props.activity.category}</p>
 {/*    Since "completed" is a boolean, it doesn't show up as a visible value.*/}
-    <p>{activity.completed}</p>
-  </div>
+        <p onClick={this.handleClick}>{this.props.activity.completed}</p>
+      </div>)
+  }
+
+}
+
+
 
 export default Activity

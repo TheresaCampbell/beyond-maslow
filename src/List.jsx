@@ -67,6 +67,10 @@ class List extends Component {
     this.setState({notification: ''})
   }
 
+  enableEditing = (id) => {
+    this.setState({editingActivityId: id})
+  }
+
   render() {
     return (
     <div>
@@ -80,7 +84,7 @@ class List extends Component {
         if (this.state.editingActivityId === activity.id) {
           return(<ActivityForm activity={activity} key={activity.id} updateActivity={this.updateActivity} resetNotification={this.resetNotification}/>)
         } else {
-          return(<Activity activity={activity} key={activity.id}/>)
+          return(<Activity activity={activity} key={activity.id} onClick={this.enableEditing}/>)
         }
       })}
     </div>
