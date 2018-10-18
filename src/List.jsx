@@ -68,7 +68,10 @@ class List extends Component {
   }
 
   enableEditing = (id) => {
-    this.setState({editingActivityId: id})
+    this.setState({
+      editingActivityId: id},
+      () => {this.title.focus()
+    })
   }
 
   render() {
@@ -82,7 +85,7 @@ class List extends Component {
       </span>
       {this.state.activities.map((activity) => {
         if (this.state.editingActivityId === activity.id) {
-          return(<ActivityForm activity={activity} key={activity.id} updateActivity={this.updateActivity} resetNotification={this.resetNotification}/>)
+          return(<ActivityForm activity={activity} key={activity.id} updateActivity={this.updateActivity} titleRef={input => this.title = input} resetNotification={this.resetNotification}/>)
         } else {
           return(<Activity activity={activity} key={activity.id} onClick={this.enableEditing}/>)
         }

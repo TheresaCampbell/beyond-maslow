@@ -45,7 +45,7 @@ class ActivityForm extends Component {
       <div className="activity">
         <form onBlur={this.handleBlur}>
           <input name="title" type="text" placeholder='Title'
-          value={this.state.title} onChange={this.handleInput}/>
+          value={this.state.title} onChange={this.handleInput} ref={this.props.titleRef}/>
           <textarea name="body" placeholder='Description'
           value={this.state.body} onChange={this.handleInput}></textarea>
           <input name="cost" type="text" placeholder='Cost'
