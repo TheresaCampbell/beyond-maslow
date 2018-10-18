@@ -10,7 +10,8 @@ class List extends Component {
     super(props)
     this.state = {
       activities: [],
-      editingActivityId: null
+      editingActivityId: null,
+      notification: ''
     }
   }
 
@@ -51,15 +52,33 @@ class List extends Component {
     .catch(error => console.log(error))
   }
 
+  updateActivity = (activity) => {
+    const activityIndex = this.state.activities.findIndex(x => x.id === activity.id)
+    const activities = update(this.state.activities, {
+      [activityIndex]: {$set: activity}
+    })
+    this.setState({
+      activities: activities,
+      notification: 'All changes saved'
+    })
+  }
+
+  resetNotification = () => {
+    this.setState({notification: ''})
+  }
+
   render() {
     return (
     <div>
       <button className="newActivityButton" onClick={this.addNewActivity}>
         +
       </button>
+      <span className="notification">
+        {this.state.notification}
+      </span>
       {this.state.activities.map((activity) => {
         if (this.state.editingActivityId === activity.id) {
-          return(<ActivityForm activity={activity} key={activity.id}/>)
+          return(<ActivityForm activity={activity} key={activity.id} updateActivity={this.updateActivity} resetNotification={this.resetNotification}/>)
         } else {
           return(<Activity activity={activity} key={activity.id}/>)
         }

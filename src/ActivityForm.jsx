@@ -15,6 +15,7 @@ class ActivityForm extends Component {
 
   //When an activity is updated through the form, its state value changes accordingly.
   handleInput = (e) => {
+    this.props.resetNotification()
     this.setState({[e.target.name]: e.target.value})
   }
 
@@ -33,6 +34,7 @@ class ActivityForm extends Component {
     )
     .then(response => {
       console.log(response)
+      this.props.updateActivity(response.data)
     })
     .catch(error => console.log(error))
   }
