@@ -6,10 +6,14 @@ class Activity extends Component {
     this.props.onClick(this.props.activity.id)
   }
 
+  handleDelete = () => {
+    this.props.onDelete(this.props.activity.id)
+  }
+
   render() {
     return(
       <div className="activity">
-        <span className="deleteButton">
+        <span className="deleteButton" onClick={this.handleDelete}>
           x
         </span>
         <h3 onClick={this.handleClick}>{this.props.activity.title}</h3>

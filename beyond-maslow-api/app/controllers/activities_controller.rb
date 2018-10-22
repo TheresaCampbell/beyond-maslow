@@ -18,6 +18,15 @@ class ActivitiesController < ApplicationController
     render json: @activity
   end
 
+  def destroy
+    @activity = Activity.find(params[:id])
+    if @activity.destroy
+      head :no_content, status: :ok
+    else
+      render json: @activity.errors, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def activity_params

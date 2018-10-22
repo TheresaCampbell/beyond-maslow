@@ -74,6 +74,16 @@ class List extends Component {
     })
   }
 
+  deleteActivity = (id) => {
+    axios.delete(`http://localhost:3001/activities/${id}`)
+    .then(response => {
+      const activityIndex = this.state.activities.findIndex(x => x.id === id)
+      const activities = update(this.state.activities, { $splice: [[activityIndex, 1]]})
+      this.setState({activities: activities})
+    })
+    .catch(error => console.log(error))
+  }
+
   render() {
     return (
     <div>
@@ -87,7 +97,7 @@ class List extends Component {
         if (this.state.editingActivityId === activity.id) {
           return(<ActivityForm activity={activity} key={activity.id} updateActivity={this.updateActivity} titleRef={input => this.title = input} resetNotification={this.resetNotification}/>)
         } else {
-          return(<Activity activity={activity} key={activity.id} onClick={this.enableEditing}/>)
+          return(<Activity activity={activity} key={activity.id} onClick={this.enableEditing} onDelete={this.deleteActivity}/>)
         }
       })}
     </div>
