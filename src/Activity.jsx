@@ -9,6 +9,9 @@ class Activity extends Component {
   render() {
     return(
       <div className="activity">
+        <span className="deleteButton">
+          x
+        </span>
         <h3 onClick={this.handleClick}>{this.props.activity.title}</h3>
         <p onClick={this.handleClick}>{this.props.activity.body}</p>
         <p onClick={this.handleClick}>{this.props.activity.cost}</p>
